@@ -10,7 +10,7 @@ import { EdgeStoreProvider } from "../lib/edgestore";
 import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: "#0bab7c",
+  themeColor: "#EA3C12",
 };
 
 export const metadata: Metadata = {
