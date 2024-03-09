@@ -1,5 +1,6 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useDrawer } from "@/hooks/useDrawer";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useSidebar from "@/hooks/useSidebar";
 import { cn } from "@/lib/utils";
@@ -17,6 +18,7 @@ const Links = () => {
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { isCollapsed } = useSidebar();
   const user = useCurrentUser();
+  const { closeDrawer } = useDrawer();
 
   /**
    * Handles the click event on a sub-menu item.
@@ -74,6 +76,7 @@ const Links = () => {
                       "px-2 py-3 flex-center-between gap-x-3",
                       isActive && "text-brand"
                     )}
+                    onClick={closeDrawer}
                   >
                     <div className="flex-align-center gap-x-3">
                       <div className={cn(isCollapsed && isDesktop && "ml-2")}>

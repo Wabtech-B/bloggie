@@ -1,6 +1,7 @@
 "use client";
 
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useDrawer } from "@/hooks/useDrawer";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useSidebar from "@/hooks/useSidebar";
 import { cn } from "@/lib/utils";
@@ -35,6 +36,7 @@ const Submenu = ({
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { isCollapsed } = useSidebar();
   const user = useCurrentUser();
+  const { closeDrawer } = useDrawer();
 
   /**
    * Updates the height of the submenu wrapper based on the current state of the submenu.
@@ -126,6 +128,7 @@ const Submenu = ({
                     "after:border-0 after:bg-brand !bg-inherit !text-brand",
                   isCollapsed && isDesktop && "after:-left-3"
                 )}
+                onClick={closeDrawer}
               >
                 <Link href={url} className="block">
                   {linkText}
