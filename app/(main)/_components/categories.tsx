@@ -7,7 +7,7 @@ import React from "react";
 
 const Categories = async () => {
   const categories: (Category & { _count: { posts: number } })[] =
-    await getPostCategories();
+    await getPostCategories("");
   const tags = await getPostTags();
 
   return (
