@@ -55,7 +55,7 @@ const Links = () => {
             const isUserLink = linkText.toLowerCase().includes("user");
 
             // Check if the user is an admin
-            const isAdmin = user.role === "ADMIN";
+            const isAdmin = user?.role === "ADMIN";
 
             // Do not render the link if it's related to users or notifications and the user is not an admin
             if (isUserLink && !isAdmin) {
