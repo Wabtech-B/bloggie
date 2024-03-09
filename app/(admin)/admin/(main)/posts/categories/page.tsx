@@ -4,10 +4,14 @@ import { getPostCategories } from "@/actions/categories";
 import { auth } from "@/auth";
 import { notFound } from "next/navigation";
 
-const Categories = async () => {
+const Categories = async ({
+  searchParams,
+}: {
+  searchParams: { search: string };
+}) => {
   const session = await auth();
   if (session?.user.role !== "ADMIN") notFound();
-  const categories = await getPostCategories();
+  const categories = await getPostCategories(searchParams.search);
 
   const formattedCategories = categories.map((category) => ({
     id: category.id,

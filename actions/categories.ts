@@ -5,8 +5,11 @@ import { PostCategorySchemaType } from "@/types";
 import { revalidatePath } from "next/cache";
 
 // ----------------------------GET POST CATEGORIES ----------------------------------------------------------------------------------
-export const getPostCategories = async () => {
+export const getPostCategories = async (search: string) => {
   return await prisma.category.findMany({
+    where: {
+      ...(search ? { name: { contains: search, mode: "insensitive" } } : {}),
+    },
     orderBy: {
       createdAt: "desc",
     },

@@ -41,7 +41,6 @@ export const getPosts = async (filter: string, search: string) => {
         { title: { contains: search, mode: "insensitive" } },
         { category: { name: { contains: search, mode: "insensitive" } } },
         { author: { name: { contains: search, mode: "insensitive" } } },
-        { content: { contains: search, mode: "insensitive" } },
       ],
     });
   }
