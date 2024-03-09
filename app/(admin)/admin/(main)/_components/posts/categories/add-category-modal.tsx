@@ -36,7 +36,10 @@ const AddCategory = () => {
    */
   const onReset = () => {
     setAddModal(false);
-    form.reset();
+    form.reset({
+      name: "",
+      description: "",
+    });
   };
 
   /**

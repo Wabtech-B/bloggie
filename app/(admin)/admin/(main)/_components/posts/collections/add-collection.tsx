@@ -36,7 +36,10 @@ const AddCollection = () => {
    */
   const onReset = () => {
     setDrawerOpen(false);
-    form.reset();
+    form.reset({
+      name: "",
+      description: "",
+    });
   };
 
   /**

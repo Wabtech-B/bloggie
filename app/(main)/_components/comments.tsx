@@ -30,11 +30,6 @@ const Comments = ({
 
   const form = useForm<CommentSchemaType>({
     resolver: zodResolver(commentSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      content: "",
-    },
   });
 
   const onSubmit = (values: CommentSchemaType) => {
@@ -42,7 +37,11 @@ const Comments = ({
       try {
         await addComment(postId, values);
         toast.success("Your comment will show once approved");
-        form.reset();
+        form.reset({
+          name: "",
+          email: "",
+          content: "",
+        });
       } catch (error: any) {
         toast.error(error.message);
       }
