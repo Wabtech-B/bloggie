@@ -13,8 +13,8 @@ const transporter = nodemailer.createTransport({
 
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://bloggie.vercel.app"
-    : "http://localhost:3000";
+    ? "https://bloggie.vercel.app/admin"
+    : "http://localhost:3000/admin";
 
 export const sendPasswordResetLink = async (email: string, token: string) => {
   const resetLink = `${url}/reset-password?email=${email}&token=${token}`;
