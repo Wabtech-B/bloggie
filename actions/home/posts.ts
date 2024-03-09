@@ -49,14 +49,6 @@ export const getPost = async (slug: string) => {
     take: 6,
   });
 
-  // Update post views
-  await prisma.post.update({
-    where: { slug },
-    data: {
-      views: { increment: 1 },
-    },
-  });
-
   return {
     post,
     relatedPosts,
@@ -166,4 +158,14 @@ export const getPostTags = async () => {
   const posts = await prisma.post.findMany();
   const tags = Array.from(new Set(posts.flatMap((post) => post.tags)));
   return tags;
+};
+
+// ---------------------------- UPDATE POST VIEWS ----------------------------------------------------------------------------------
+export const updatePostViews = async (postId: string) => {
+  await prisma.post.update({
+    where: { id: postId },
+    data: {
+      views: { increment: 1 },
+    },
+  });
 };
