@@ -139,7 +139,7 @@ const Login = () => {
                   <span>Processing...</span>
                 </div>
               ) : (
-                "Sign Up"
+                "Sign In"
               )}
             </Button>
           </div>

@@ -225,7 +225,7 @@ const AddPostForm = ({ categories }: AddPostFormProps) => {
 
               {/* Image */}
               <div className="mt-4">
-                <label htmlFor="category">Cover Image</label>
+                <label htmlFor="image">Cover Image</label>
                 <ImageUpload setImage={setImage} />
               </div>
 

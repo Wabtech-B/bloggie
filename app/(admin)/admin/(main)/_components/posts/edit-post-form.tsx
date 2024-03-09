@@ -1,6 +1,7 @@
 "use client";
 
 import { updatePost } from "@/actions/posts";
+import { ImageUpload } from "@/components/image-upload";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -257,9 +258,9 @@ const EditPostForm = ({ categories, post }: EditPostFormProps) => {
                 />
               </div>
               {/*  */}
-              <div>
-                <label htmlFor="category">Cover Image</label>
-                {image && (
+              <div className="mt-4">
+                <label htmlFor="image">Cover Image</label>
+                {image ? (
                   <div className="relative w-full h-[100px]">
                     <Image
                       src={image}
@@ -284,6 +285,8 @@ const EditPostForm = ({ categories, post }: EditPostFormProps) => {
                       </div>
                     </div>
                   </div>
+                ) : (
+                  <ImageUpload setImage={setImage} />
                 )}
               </div>
               ;{/* Description */}

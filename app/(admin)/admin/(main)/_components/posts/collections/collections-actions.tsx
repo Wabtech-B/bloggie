@@ -19,8 +19,8 @@ const CollectionsActions = ({ id }: { id: string }) => {
    * Handles the edit action for a collection.
    */
   const onEdit = async () => {
-    const contact = await getCollection(id);
-    setCollection(contact);
+    const collection = await getCollection(id);
+    setCollection(collection);
     setEditDrawer(true);
   };
 
