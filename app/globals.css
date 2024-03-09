@@ -1,33 +1,408 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-gray-700 dark:text-gray-400 !overflow-x-hidden;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+body.modal {
+  @apply !overflow-hidden w-screen h-screen;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+p {
+  @apply text-muted-foreground;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7c7c7;
+  border-radius: 1rem;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background: #c7c7c7;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  @apply hidden;
+}
+
+.test-color {
+  color: #036a4b;
+}
+
+@keyframes slide {
+  from {
+    transform: translate-yX(0);
   }
+  to {
+    transform: translate-yX(-100%);
+  }
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  @apply !w-5 !h-5 !rounded !border !border-border !shadow-sm !bg-transparent  disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+input[type="checkbox"] {
+  @apply form-checkbox;
+}
+
+input[type="radio"] {
+  @apply form-radio;
+}
+
+input[type="radio"] {
+  @apply !rounded-full;
+}
+
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
+  @apply !shadow-brand/30 !shadow-md !bg-brand hover:bg-brand !border-brand !ring-brand active:!bg-brand text-brand !ring-offset-background focus:!ring-offset-background;
+}
+
+.form-checkbox:focus,
+.form-radio:focus {
+  @apply focus:!ring-offset-background !ring-brand;
+}
+
+.relative.w-full.overflow-auto::-webkit-scrollbar {
+  @apply hidden;
+}
+.relative.w-full.overflow-auto:hover::-webkit-scrollbar {
+  @apply block;
+}
+
+/* Back to top button */
+.back-to-top-btn {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.back-to-top-btn.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tooltip */
+.tooltip-enter {
+  opacity: 0;
+}
+
+.tooltip-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.tooltip-exit {
+  opacity: 1;
+}
+
+.tooltip-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+label {
+  @apply block mb-1;
+}
+
+.code-snippet pre {
+  @apply !bg-transparent rounded-2xl;
+  font-family: "Fira Code" !important;
+}
+
+.code-snippet pre span {
+  font-family: "Fira Code" !important;
+  opacity: 100 !important;
+}
+
+.quill .ql-toolbar * {
+  @apply !border-border !text-slate-700 dark:!text-slate-200;
+}
+
+.quill p,
+.quill li {
+  @apply text-base;
+}
+
+.quill * {
+  @apply !border-border !font-thiccboi;
+}
+
+.ql-toolbar {
+  @apply sticky top-0 bg-background/60 backdrop-blur-sm z-[66];
+}
+
+.quill.post-quill .ql-container.ql-snow {
+  @apply !border-none;
+}
+
+.quill.post-quill .ql-toolbar.ql-snow {
+  @apply !border-none;
+}
+
+.quill .ql-syntax {
+  @apply !bg-slate-900;
+  font-family: "Fira Code" !important;
+}
+.quill .ql-syntax span {
+  font-family: "Fira Code" !important;
+}
+
+.quill .ql-picker-options {
+  @apply dark:!bg-slate-800;
+}
+
+.quill .ql-editor {
+  @apply min-h-[600px];
+}
+
+.quill .ql-tooltip {
+  @apply dark:!bg-slate-800 dark:!text-white;
+}
+
+.quill .ql-tooltip a {
+  @apply !text-brand;
+}
+
+.quill .ql-stroke {
+  stroke: rgb(148 163 184) !important;
+}
+
+.quill .ql-fill {
+  fill: rgb(148 163 184) !important;
+}
+
+.quill code {
+  @apply rounded-sm dark:!bg-slate-900 px-2 border border-border;
+}
+
+.quill a {
+  @apply !text-brand;
+}
+
+.ql-snow.ql-toolbar button:hover,
+.ql-snow .ql-toolbar button:hover,
+.ql-snow.ql-toolbar button:focus,
+.ql-snow .ql-toolbar button:focus,
+.ql-snow.ql-toolbar button.ql-active,
+.ql-snow .ql-toolbar button.ql-active,
+.ql-snow.ql-toolbar .ql-picker-label:hover,
+.ql-snow .ql-toolbar .ql-picker-label:hover,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active,
+.ql-snow.ql-toolbar .ql-picker-item:hover,
+.ql-snow .ql-toolbar .ql-picker-item:hover,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+  color: #ea3c12 !important;
+}
+.ql-snow.ql-toolbar button:hover .ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-fill,
+.ql-snow.ql-toolbar button:focus .ql-fill,
+.ql-snow .ql-toolbar button:focus .ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill,
+.ql-snow.ql-toolbar button:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar button:focus .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:focus .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
+  fill: #ea3c12 !important;
+}
+.ql-snow.ql-toolbar button:hover .ql-stroke,
+.ql-snow .ql-toolbar button:hover .ql-stroke,
+.ql-snow.ql-toolbar button:focus .ql-stroke,
+.ql-snow .ql-toolbar button:focus .ql-stroke,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke,
+.ql-snow.ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar button:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar button:focus .ql-stroke-miter,
+.ql-snow .ql-toolbar button:focus .ql-stroke-miter,
+.ql-snow.ql-toolbar button.ql-active .ql-stroke-miter,
+.ql-snow .ql-toolbar button.ql-active .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter,
+.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter,
+.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
+  stroke: #ea3c12 !important;
+}
+
+.post-content h1,
+h2,
+h3 {
+  @apply font-bold mb-3;
+}
+
+.post-content p,
+.post-content li {
+  @apply !text-base leading-7;
+}
+
+.post-content h1,
+.post-content h2 {
+  @apply text-3xl;
+}
+
+.post-content h3 {
+  @apply text-2xl;
+}
+
+.post-content ul {
+  @apply list-disc !ml-4;
+}
+
+.post-content ul li {
+  @apply !ml-4 my-1;
+}
+
+.post-content ol {
+  @apply list-decimal !ml-4;
+}
+
+.post-content ol li {
+  @apply !ml-4 my-1;
+}
+
+.post-content code {
+  @apply rounded-sm dark:!bg-slate-900 px-2 border border-border break-words;
+}
+
+.post-content blockquote {
+  @apply pl-3 border-l-4 border-l-border italic ml-4 my-4  !text-lg;
+}
+
+.post-content blockquote span {
+  @apply dark:!text-slate-300;
+}
+
+.post-content a {
+  @apply underline !text-brand;
+}
+
+.post-content .ql-syntax {
+  @apply bg-slate-900 my-4 rounded-lg p-4 text-white w-full overflow-x-auto;
+}
+
+.post-content .ql-syntax span {
+  font-family: "Fira Code" !important;
+}
+
+.post-content p,
+.post-content span {
+  @apply !break-words;
+}
+
+.post-content img,
+.post-content iframe {
+  @apply w-full h-auto sm:h-[400px] object-cover my-2 md:my-4;
+}
+
+.react-tagsinput {
+  @apply w-full rounded-md !border !border-input !bg-background;
+}
+
+.react-tagsinput-tag {
+  @apply !py-[3px] !px-2 !rounded-full !font-thiccboi !bg-transparent !text-brand !border-brand;
 }

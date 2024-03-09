@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  AUTHOR
+}
+
+model User {
+  id               String    @id @default(uuid()) @map("_id")
+  name             String?
+  email            String    @unique
+  emailVerified    DateTime?
+  isEmailVerified  Boolean?  @default(false)
+  image            String?
+  password         String?
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  verificationCode String?
+  role             UserRole  @default(ADMIN)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  posts Post[]
+}
+
+model Collection {
+  id             String   @id @default(uuid()) @map("_id")
+  name           String   @unique
+  description    String?
+  position       Int
+  showOnHomePage Boolean  @default(true)
+  displayType    String   @default("simple_grid")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  postsIDs String[]
+  posts    Post[]   @relation(fields: [postsIDs], references: [id])
+}
+
+model Post {
+  id              String   @id @default(uuid()) @map("_id")
+  authorId        String
+  categoryId      String
+  title           String
+  slug            String   @unique
+  description     String?
+  coverImage      String
+  content         String
+  views           Int      @default(0)
+  tags            String[]
+  isPublished     Boolean  @default(false)
+  isTrashed       Boolean  @default(false)
+  showAuthor      Boolean  @default(true)
+  showTags        Boolean  @default(true)
+  showDescription Boolean  @default(true)
+  datePublished   DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  author   User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  collectionsIDs String[]
+  collections    Collection[] @relation(fields: [collectionsIDs], references: [id])
+
+  comments Comment[]
+
+  @@index([categoryId])
+  @@index([authorId])
+}
+
+model Category {
+  id          String   @id @default(uuid()) @map("_id")
+  name        String   @unique
+  description String?  @db.String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  posts Post[]
+}
+
+model Comment {
+  id         String   @id @default(uuid()) @map("_id")
+  postId     String
+  name       String
+  email      String
+  isApproved Boolean  @default(false)
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
