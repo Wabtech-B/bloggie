@@ -3,7 +3,7 @@ import Avatar from "@/components/avatar";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 
-import { getPost, updatePostViews } from "@/actions/home/posts";
+import { getPost } from "@/actions/home/posts";
 import { formatRelativeTime } from "@/lib/utils";
 import { Metadata } from "next";
 import Image from "next/image";

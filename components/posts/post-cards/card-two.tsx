@@ -1,6 +1,3 @@
-"use client";
-
-import { updatePostViews } from "@/actions/home/posts";
 import Avatar from "@/components/avatar";
 import Badge from "@/components/badge";
 import { cn, formatRelativeTime } from "@/lib/utils";
@@ -34,7 +31,6 @@ const CardTwo = ({
         width
       )}
       title={post.title}
-      onClick={async () => await updatePostViews(post!.id)}
     >
       <Image
         src={post.coverImage}
