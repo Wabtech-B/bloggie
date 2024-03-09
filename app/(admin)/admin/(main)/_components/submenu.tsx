@@ -111,7 +111,7 @@ const Submenu = ({
             );
 
             // Check if the user is an admin
-            const isAdmin = user.role === "ADMIN";
+            const isAdmin = user?.role === "ADMIN";
 
             if (isExcludedLink && !isAdmin) {
               return null;
