@@ -118,7 +118,7 @@ const Drawer: React.FC<DrawerProps> = ({
             >
               <motion.div
                 className={cn(
-                  "fixed bg-background shadow-lg px-4",
+                  "fixed bg-background shadow-lg px-4 z-[99]",
                   position === "left"
                     ? "left-0"
                     : position === "right"
