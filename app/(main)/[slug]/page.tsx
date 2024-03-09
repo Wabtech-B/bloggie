@@ -3,9 +3,7 @@ import Avatar from "@/components/avatar";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 
-import { getComments } from "@/actions/home/comments";
-import { getPost } from "@/actions/home/posts";
-import { updatePostViews } from "@/actions/posts";
+import { getPost, updatePostViews } from "@/actions/home/posts";
 import { formatRelativeTime } from "@/lib/utils";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -37,12 +35,7 @@ export async function generateMetadata({
 const PostDetails = async ({ params }: { params: { slug: string } }) => {
   const { post, relatedPosts } = await getPost(params.slug);
 
-  const comments = await getComments(post!.id);
-
   const shareUrl = `https://bloggie.vercel.app/${post!.slug}`;
-
-  // UPDATE POST VIEWS WHENEVER SOMEONVE VISITS A POST
-  const views = await updatePostViews(post!.id);
 
   return (
     <div className="max-w-7xl mx-auto px-3">
@@ -104,7 +97,7 @@ const PostDetails = async ({ params }: { params: { slug: string } }) => {
       </div>
 
       {/* Comments */}
-      <Comments comments={comments} postId={post!.id} />
+      <Comments comments={post?.comments!} postId={post!.id} />
     </div>
   );
 };

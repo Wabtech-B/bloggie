@@ -130,16 +130,6 @@ export const updatePost = async (
   }
 };
 
-// ---------------------------- UPDATE POST VIEWS ----------------------------------------------------------------------------------
-export const updatePostViews = async (postId: string) => {
-  await prisma.post.update({
-    where: { id: postId },
-    data: {
-      views: { increment: 1 },
-    },
-  });
-};
-
 // ----------------------------DELETE POST ----------------------------------------------------------------------------------
 export const deletePost = async (postId: string) => {
   try {

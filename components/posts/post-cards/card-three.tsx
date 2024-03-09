@@ -1,3 +1,6 @@
+"use client";
+
+import { updatePostViews } from "@/actions/home/posts";
 import Avatar from "@/components/avatar";
 import Badge from "@/components/badge";
 import { cn, formatRelativeTime } from "@/lib/utils";
@@ -25,6 +28,7 @@ const CardThree = ({
       href={`/${post.slug}`}
       className={cn("group p-2 border rounded-lg shrink-0", width)}
       title={post.title}
+      onClick={async () => await updatePostViews(post!.id)}
     >
       <div className="grid grid-cols-5">
         <div

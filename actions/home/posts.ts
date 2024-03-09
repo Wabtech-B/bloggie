@@ -28,11 +28,11 @@ const QueryConditions = (search: string) => {
     : {};
 };
 
-// ----------------------------GET SINGLE POST AND RELATED POSTS ----------------------------------------------------------------------------------
+// ----------------------------GET SINGLE POST AND RELATED POSTS + COMMENTS ----------------------------------------------------------------------------------
 export const getPost = async (slug: string) => {
   const post = await prisma.post.findUnique({
     where: { slug },
-    include: { category: true, author: true },
+    include: { category: true, author: true, comments: true },
   });
 
   const relatedPosts = await prisma.post.findMany({
@@ -158,4 +158,14 @@ export const getPostTags = async () => {
   const posts = await prisma.post.findMany();
   const tags = Array.from(new Set(posts.flatMap((post) => post.tags)));
   return tags;
+};
+
+// ---------------------------- UPDATE POST VIEWS ----------------------------------------------------------------------------------
+export const updatePostViews = async (postId: string) => {
+  await prisma.post.update({
+    where: { id: postId },
+    data: {
+      views: { increment: 1 },
+    },
+  });
 };
