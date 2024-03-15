@@ -38,7 +38,7 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
 import DeleteSelectedModal from "../../delete-selected-modal";
-import AddComponentCategory from "./add-category-modal";
+import AddCategory from "./add-category-modal";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -159,7 +159,7 @@ export function DataTable<TData, TValue>({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <AddComponentCategory />
+          <AddCategory />
         </div>
       </div>
       <div className="rounded-md border">

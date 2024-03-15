@@ -174,7 +174,10 @@ const AddPostForm = ({ categories }: AddPostFormProps) => {
                   <FormItem>
                     <FormLabel>Category</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <SelectTrigger className="w-full bg-transparent">
                           <SelectValue placeholder="Category" />
                         </SelectTrigger>

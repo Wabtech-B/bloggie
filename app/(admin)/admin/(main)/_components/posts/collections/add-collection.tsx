@@ -81,7 +81,7 @@ const AddCollection = () => {
                   <FormItem>
                     <FormLabel>Collection Name</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="Full Name" />
+                      <Input {...field} placeholder="Collection Name" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -103,7 +103,7 @@ const AddCollection = () => {
                 )}
               />
             </div>
-            <div className="flex-align-center gap-3 my-4 justify-end">
+            <div className="flex-align-center gap-3 mt-4 justify-end">
               <Button
                 type="button"
                 variant="outline"

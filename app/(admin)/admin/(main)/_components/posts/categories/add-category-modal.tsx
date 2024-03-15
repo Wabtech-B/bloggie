@@ -84,7 +84,7 @@ const AddCategory = () => {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="Full Name" />
+                        <Input {...field} placeholder="Category Name" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -106,7 +106,7 @@ const AddCategory = () => {
                   )}
                 />
               </div>
-              <div className="flex-align-center gap-3 my-4 justify-end">
+              <div className="flex-align-center gap-3 mt-4 justify-end">
                 <Button
                   type="button"
                   variant="outline"
