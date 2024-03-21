@@ -17,6 +17,10 @@ const SignIn = async () => {
         </div>
       )}
       <SignInForm />
+      <p className="mt-2 text-center">
+        Email: <strong>admin@gmail.com</strong>, Password:{" "}
+        <strong>12345678</strong>
+      </p>
     </div>
   );
 };
